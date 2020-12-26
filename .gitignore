@@ -1,3 +1,8 @@
 venv
 ImagesAttendance
-ImagesBasics
+ImagesBasic
+Attendance.csv
+__pycache__
+local_settings.__py
+
+
