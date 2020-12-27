@@ -3,8 +3,7 @@ import numpy as np
 import face_recognition
 import os
 from datetime import datetime
-
-# from PIL import ImageGrab
+from PIL import ImageGrab
 
 path = 'ImagesAttendance'
 images = []
@@ -41,10 +40,10 @@ def markAttendance(name):
 
 
 #### FOR CAPTURING SCREEN RATHER THAN WEBCAM
-# def captureScreen(bbox=(300,300,690+300,530+300)):
-#     capScr = np.array(ImageGrab.grab(bbox))
-#     capScr = cv2.cvtColor(capScr, cv2.COLOR_RGB2BGR)
-#     return capScr
+def captureScreen(bbox=(300,300,690+300,530+300)):
+     capScr = np.array(ImageGrab.grab(bbox))
+     capScr = cv2.cvtColor(capScr, cv2.COLOR_RGB2BGR)
+     return capScr
 
 encodeListKnown = findEncodings(images)
 print('Encoding Complete')
@@ -63,12 +62,12 @@ while True:
     for encodeFace, faceLoc in zip(encodesCurFrame, facesCurFrame):
         matches = face_recognition.compare_faces(encodeListKnown, encodeFace)
         faceDis = face_recognition.face_distance(encodeListKnown, encodeFace)
-        # print(faceDis)
+        print(faceDis)
         matchIndex = np.argmin(faceDis)
 
         if matches[matchIndex]:
             name = classNames[matchIndex].upper()
-            # print(name)
+            print(name)
             y1, x2, y2, x1 = faceLoc
             y1, x2, y2, x1 = y1 * 4, x2 * 4, y2 * 4, x1 * 4
             cv2.rectangle(img, (x1, y1), (x2, y2), (0, 255, 0), 2)
